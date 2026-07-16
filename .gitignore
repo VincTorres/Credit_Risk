@@ -1,0 +1,9 @@
+# Ignorar arquivos temporários do Jupyter e Python
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Ignorar ambientes virtuais (caso você use)
+venv/
+env/
+.env
