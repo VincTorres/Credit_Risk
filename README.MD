@@ -151,7 +151,7 @@ O projeto pode ser expandido futuramente com novas técnicas de **Data Science e
 * **Balanceamento de Dados:** testar técnicas como SMOTE e comparar seu impacto nas métricas de classificação.
 * **Otimização baseada em custos:** definir uma função de custo que represente financeiramente Falsos Positivos e Falsos Negativos e utilizar esse critério para selecionar o threshold.
 * **Modelos adicionais:** comparar o Random Forest com outros algoritmos de classificação, como Logistic Regression, XGBoost e Gradient Boosting.
-* **Explicabilidade:** implementar técnicas como SHAP para analisar a contribuição das variáveis nas previsões individuais.
+
 
 ---
 
@@ -159,4 +159,4 @@ O projeto pode ser expandido futuramente com novas técnicas de **Data Science e
 
 * **Desenvolvedor:** Vinicius Torres
 * **GitHub:** [VincTorres](https://github.com/VincTorres)
-* **LinkedIn:** [Vinicius Torres](https://www.linkedin.com/)
+
