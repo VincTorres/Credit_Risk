@@ -1,30 +1,162 @@
-# Projeto de Análise de Risco de Crédito
+# 🎯 Projeto de Análise de Risco de Crédito
 
-Este repositório contém o desenvolvimento completo de um modelo de machine learning para avaliação de risco de crédito. O projeto foca em identificar perfis de clientes com maior probabilidade de inadimplência, utilizando técnicas de processamento de dados, análise exploratória e modelagem preditiva.
+O projeto desenvolve uma solução de **classificação supervisionada para análise de risco de crédito**, utilizando técnicas de Machine Learning para classificar clientes entre **bom (`good`) e mau risco de crédito (`bad`)**.
 
-## 📁 Estrutura do Projeto
-O projeto foi organizado para garantir reprodutibilidade e clareza no fluxo de trabalho:
+O desenvolvimento contempla as principais etapas de um projeto de Machine Learning, incluindo **análise exploratória, preparação dos dados, engenharia de atributos, treinamento, otimização de hiperparâmetros, validação cruzada e avaliação do modelo**.
 
-* `data/`: Armazena o dataset original (`german_credit_data.csv`).
-* `notebooks/`: Contém os cadernos de desenvolvimento:
-    * `EDA.ipynb`: Análise exploratória, tratamento de outliers e visualização de correlações.
-    * `Modelagem.ipynb`: Desenvolvimento do modelo *Random Forest*, incluindo a comparação entre o modelo base e a versão tunada.
-    * `Avaliacao_Modelo.ipynb`: Validação final da performance do modelo e análise de métricas.
-* `models/`: Armazena os modelos treinados e serializados (`.pkl`).
-* `processed/`: Contém os dados limpos e preparados para treino e teste.
-
-## 🛠 Tecnologias e Bibliotecas
-* **Linguagem:** Python
-* **Manipulação de Dados:** Pandas, NumPy
-* **Machine Learning:** Scikit-Learn (Random Forest)
-* **Persistência de Dados:** Joblib
-* **Versionamento:** Git e GitHub
-
-## 🚀 Etapas do Desenvolvimento
-1. **Limpeza de Dados:** Tratamento de variáveis categóricas e preenchimento de valores ausentes para garantir a integridade do dataset.
-2. **Análise Exploratória (EDA):** Identificação dos principais fatores que influenciam a concessão de crédito.
-3. **Modelagem Preditiva:** Treinamento de algoritmos *Random Forest*, com foco em maximizar a capacidade de generalização do modelo.
-4. **Avaliação:** Análise crítica dos resultados obtidos, garantindo que o modelo seja robusto para cenários reais de risco.
+Além da otimização do modelo, foi realizado o ajuste do **classification threshold**, buscando melhorar o equilíbrio entre Precision e Recall na identificação de clientes classificados como `bad`.
 
 ---
-*Desenvolvido por Vinicius Torres.*
+
+## 📂 Estrutura
+
+```text
+Credit_Risk_Project/
+│
+├── data/
+│   └── german_credit_data.csv       # Dataset original utilizado
+│
+├── notebooks/
+│   ├── 01_EDA.ipynb                 # Análise Exploratória dos Dados
+│   ├── 02_Modelagem.ipynb           # Preparação, treinamento e otimização
+│   └── 03_Avaliacao_Modelo.ipynb    # Avaliação e otimização do threshold
+│
+├── models/
+│   ├── random_forest_baseline.pkl   # Modelo baseline
+│   └── random_forest_tuned.pkl      # Modelo otimizado
+│
+├── processed/
+│   ├── X_train.pkl                  # Variáveis preditoras de treino
+│   ├── y_train.pkl                  # Variável alvo de treino
+│   ├── X_test.pkl                   # Variáveis preditoras de teste
+│   └── y_test.pkl                   # Variável alvo de teste
+│
+└── README.md
+```
+
+---
+
+# 🏗️ Desenvolvimento do Projeto
+
+O projeto foi dividido em três etapas principais:
+
+## 📊 1. Análise Exploratória dos Dados
+
+**Arquivo:** `notebooks/01_EDA.ipynb`
+
+Nesta etapa foi realizada a exploração inicial do dataset com o objetivo de compreender sua estrutura, distribuição e características antes da modelagem.
+
+Principais atividades:
+
+* Inspeção inicial do dataset;
+* Análise dos tipos e estrutura das variáveis;
+* Estatísticas descritivas;
+* Análise da distribuição das variáveis;
+* Identificação de valores ausentes;
+* Análise de outliers;
+* Análise de variáveis categóricas;
+* Análise da distribuição da variável alvo;
+* Análise das relações entre as características dos clientes e o risco de crédito;
+* Visualização dos dados e das principais relações encontradas.
+
+A etapa de EDA serviu como base para definir os procedimentos de preparação e transformação utilizados posteriormente na modelagem.
+
+---
+
+## 🤖 2. Modelagem Preditiva & Otimização
+
+**Arquivo:** `notebooks/02_Modelagem.ipynb`
+
+Nesta etapa foram realizados o tratamento final dos dados, treinamento e otimização do modelo de Machine Learning.
+
+### Preparação dos Dados
+
+Foram realizadas as transformações necessárias para tornar os dados adequados ao algoritmo, incluindo:
+
+* Tratamento de valores ausentes;
+* Preenchimento das categorias ausentes;
+* Codificação das variáveis categóricas utilizando **One-Hot Encoding**;
+* Separação entre variáveis preditoras (`X`) e variável alvo (`y`);
+* Divisão dos dados em conjuntos de treino e teste.
+
+### Modelo
+
+Foi utilizado o **Random Forest Classifier** para realizar a classificação binária entre `good` e `bad`.
+
+Inicialmente foi desenvolvido um **modelo baseline**, utilizado como referência para o processo de otimização.
+
+### Hyperparameter Tuning
+
+A otimização dos hiperparâmetros foi realizada utilizando `RandomizedSearchCV` com **5-Fold Cross-Validation**.
+
+Foram avaliados diferentes valores para parâmetros como:
+
+* `n_estimators`;
+* `max_depth`;
+* `min_samples_split`;
+* `min_samples_leaf`;
+* `max_features`;
+* `class_weight`.
+
+O **Recall** foi utilizado como métrica principal durante a busca, devido à importância de identificar corretamente a classe `bad`.
+
+Também foi utilizado `class_weight="balanced"` para considerar o desbalanceamento existente entre as classes.
+
+### 💾 Persistência dos Modelos
+
+Após o treinamento, os modelos foram serializados utilizando **Joblib**, permitindo que fossem posteriormente carregados para a etapa de avaliação sem a necessidade de realizar novamente o treinamento.
+
+---
+
+# 🛡️ 3. Avaliação do Modelo & Otimização do Threshold
+
+**Arquivo:** `notebooks/03_Avaliacao_Modelo.ipynb`
+
+Nesta etapa foi realizada a avaliação dos modelos desenvolvidos, incluindo a comparação entre o **Random Forest baseline** e o **modelo otimizado**.
+
+Foram utilizadas diferentes métricas para avaliar o desempenho da classificação:
+
+* Accuracy;
+* Precision;
+* Recall;
+* F1-Score;
+* ROC-AUC.
+
+Também foram utilizadas ferramentas de análise visual, como:
+
+* Matriz de Confusão;
+* Curva ROC;
+* Curva Precision-Recall.
+
+---
+
+## 🎚️ Otimização do Classification Threshold
+
+Além da otimização dos hiperparâmetros, foi realizada uma etapa de otimização do **limiar de classificação (*classification threshold*)**.
+
+O threshold padrão de `0.50` foi substituído por um valor definido a partir da análise da relação entre **Precision e Recall**.
+
+Para realizar essa otimização, foram obtidas probabilidades utilizando **validação cruzada no conjunto de treinamento**, através de `cross_val_predict`.
+
+O threshold que apresentou o maior **F1-Score** foi selecionado e posteriormente aplicado ao conjunto de teste.
+
+---
+
+# 🚀 Roadmap e Melhorias Futuras
+
+O projeto pode ser expandido futuramente com novas técnicas de **Data Science e Machine Learning**.
+
+### 🧠 Data Science & Machine Learning
+
+* **Balanceamento de Dados:** testar técnicas como SMOTE e comparar seu impacto nas métricas de classificação.
+* **Otimização baseada em custos:** definir uma função de custo que represente financeiramente Falsos Positivos e Falsos Negativos e utilizar esse critério para selecionar o threshold.
+* **Modelos adicionais:** comparar o Random Forest com outros algoritmos de classificação, como Logistic Regression, XGBoost e Gradient Boosting.
+
+
+---
+
+## 📞 Contato
+
+* **Desenvolvedor:** Vinicius Torres
+* **GitHub:** [VincTorres](https://github.com/VincTorres)
+
