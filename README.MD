@@ -19,7 +19,7 @@ Credit_Risk_Project/
 ├── notebooks/
 │   ├── 01_EDA.ipynb                 # Análise Exploratória dos Dados
 │   ├── 02_Modelagem.ipynb           # Preparação, treinamento e otimização
-│   └── 03_Avaliacao_Modelo.ipynb    # Avaliação e otimização do threshold
+│   └── 03_Avaliacao_Modelo.ipynb    # Avaliação, otimização do threshold e explicabilidade
 │
 ├── models/
 │   ├── random_forest_baseline.pkl   # Modelo baseline
