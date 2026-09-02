@@ -142,6 +142,21 @@ O threshold que apresentou o maior **F1-Score** foi selecionado e posteriormente
 
 ---
 
+## 🔎 Interpretabilidade com SHAP
+
+Para aumentar a interpretabilidade do modelo, foi utilizada a técnica **SHAP (SHapley Additive exPlanations)**.
+
+O SHAP permite identificar a contribuição de cada variável para as previsões do modelo, possibilitando analisar tanto o comportamento global quanto as decisões individuais.
+
+Foram utilizadas:
+
+* **Análise global:** identificação das variáveis que apresentam maior influência nas previsões;
+* **Análise individual:** identificação de como cada característica contribuiu para aumentar ou diminuir a previsão de risco de um determinado cliente.
+
+Essa etapa permite compreender melhor como o modelo chegou às suas decisões, tornando os resultados mais transparentes e interpretáveis.
+
+---
+
 # 🚀 Roadmap e Melhorias Futuras
 
 O projeto pode ser expandido futuramente com novas técnicas de **Data Science e Machine Learning**.
